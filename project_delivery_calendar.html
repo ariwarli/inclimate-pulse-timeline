@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IN-CLIMATE — PULSE AI MONITORING SYSTEM // SEPTEMBER 2026 MONOGRAPH</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Playfair Display (Dramatic Editorial Serif) & Inter & Space Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            display: ['"Cinzel"', 'serif'],
+            sans: ['"Inter"', 'sans-serif'],
+            mono: ['"Space Mono"', 'monospace'],
+          },
+          colors: {
+            mono: {
+              black: '#000000',
+              900: '#111111',
+              800: '#222222',
+              600: '#555555',
+              400: '#888888',
+              200: '#D4D4D4',
+              100: '#ECECEC',
+              50: '#F7F7F7',
+              white: '#FFFFFF',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Stark Monochrome Base Styling */
+    body {
+      background-color: #FFFFFF;
+      color: #000000;
+      selection-background-color: #000000;
+      selection-color: #FFFFFF;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection {
+      background: #000000;
+      color: #FFFFFF;
+    }
+
+    /* Architectural Hairline Borders */
+    .hairline-b {
+      border-bottom: 1px solid #000000;
+    }
+    .hairline-t {
+      border-top: 1px solid #000000;
+    }
+    .hairline-r {
+      border-right: 1px solid #000000;
+    }
+    .hairline-l {
+      border-left: 1px solid #000000;
+    }
+    .hairline-all {
+      border: 1px solid #000000;
+    }
+    .hairline-thick {
+      border: 2px solid #000000;
+    }
+    .hairline-heavy {
+      border: 4px solid #000000;
+    }
+
+    /* Subtle Architectural Paper Texture / Watermark Lines */
+    .editorial-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    }
+
+    /* Inversion Hover Micro-transitions */
+    .hover-invert {
+      transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hover-invert:hover {
+      background-color: #000000;
+      color: #FFFFFF;
+    }
+
+    /* Custom Minimal Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FFFFFF;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #000000;
+    }
+
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-mono-white text-mono-black editorial-grid font-sans flex flex-col justify-between">
+
+  <!-- ================================================================= -->
+  <!-- EDITORIAL METADATA RUNNER // AUSTERE PUBLICATION HEADER          -->
+  <!-- ================================================================= -->
+  <div class="w-full bg-mono-black text-mono-white font-mono text-[11px] tracking-widest py-2.5 px-4 sm:px-8 hairline-b uppercase flex flex-col sm:flex-row justify-between items-center gap-2 select-none no-print">
+    <div class="flex items-center gap-3">
+      <span class="inline-block w-2 h-2 bg-mono-white"></span>
+      <span class="font-bold">IN-CLIMATE // PROGRAM MONITORING MONOGRAPH</span>
+      <span class="text-mono-400 hidden md:inline-block">— THE ASIA FOUNDATION × TERAS DIGITAL TECH</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <span class="text-mono-200">TIMELINE: SEPTEMBER 2026</span>
+      <span class="bg-mono-white text-mono-black px-2 py-0.5 font-bold tracking-wider text-[10px]">
+        GO-LIVE: 25 SEP 2026
+      </span>
+    </div>
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- MAIN EDITORIAL MASTHEAD // DRAMATIC SERIF TYPOGRAPHY               -->
+  <!-- ================================================================= -->
+  <header class="hairline-b bg-mono-white px-4 sm:px-8 py-10 lg:py-14">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+      
+      <!-- Monograph Title Block -->
+      <div class="space-y-3 max-w-4xl">
+        <div class="flex flex-wrap items-center gap-3 font-mono text-xs tracking-widest uppercase">
+          <span class="px-2.5 py-1 hairline-all bg-mono-black text-mono-white font-bold">
+            DOCUMENT N° 09-2026
+          </span>
+          <span class="text-mono-600">DISTRIBUSI STRATEGIS & IMPLEMENTASI</span>
+          <span class="text-mono-400">|</span>
+          <span class="font-semibold text-mono-900">VERSI 1.0 — INITIAL DEPLOYMENT</span>
+        </div>
+
+        <h1 class="font-serif font-black text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-[0.9] text-mono-black uppercase">
+          PULSE <span class="italic font-normal">AI</span> MONITOR
+        </h1>
+        
+        <p class="font-mono text-xs sm:text-sm text-mono-600 tracking-wider max-w-2xl pt-2">
+          JADWAL PENGIRIMAN PROYEK & TAHAPAN SISTEM // FORMAT NON-TEKNIS UNTUK MANAJEMEN & TIM M&amp;E
+        </p>
+      </div>
+
+      <!-- Austere Architectural Navigation Buttons -->
+      <div class="flex flex-wrap items-center gap-2.5 no-print font-mono text-xs shrink-0">
+        <button onclick="scrollToId('clarity-grid')" class="px-4 py-2.5 hairline-all bg-mono-white text-mono-black hover-invert uppercase tracking-wider font-semibold">
+          [I] RINGKASAN CEPAT
+        </button>
+
+        <button onclick="scrollToId('calendar-view')" class="px-4 py-2.5 hairline-all bg-mono-white text-mono-black hover-invert uppercase tracking-wider font-semibold">
+          [II] KALENDER
+        </button>
+
+        <button onclick="scrollToId('milestone-block')" class="px-4 py-2.5 hairline-thick bg-mono-black text-mono-white hover:bg-mono-white hover:text-mono-black transition-all uppercase tracking-wider font-bold">
+          ★ TARGET 25 SEP
+        </button>
+
+        <button onclick="window.print()" class="px-4 py-2.5 hairline-all bg-mono-50 text-mono-black hover-invert uppercase tracking-wider font-semibold flex items-center gap-2">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          CETAK / PDF
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================================================================= -->
+  <!-- EDITORIAL SPREAD HERO // DRAMATIC VIEWPORT-SCALED SERIF           -->
+  <!-- ================================================================= -->
+  <section class="hairline-b bg-mono-50 py-10 sm:py-16 px-4 sm:px-8 overflow-hidden">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-baseline justify-between gap-6">
+      <div>
+        <span class="font-mono text-xs tracking-widest text-mono-600 block uppercase mb-1">RENTANG WAKTU UTAMA</span>
+        <div class="font-serif font-black text-[13vw] sm:text-[10vw] lg:text-[8rem] tracking-tighter leading-none text-mono-black select-none">
+          SEPTEMBER <span class="italic font-normal text-mono-600">2026</span>
+        </div>
+      </div>
+      <div class="max-w-sm font-serif text-sm sm:text-base text-mono-800 leading-relaxed space-y-2">
+        <p class="font-semibold text-mono-black uppercase tracking-wider text-xs font-mono">
+          // SIKLUS 30 HARI
+        </p>
+        <p>
+          Transformasi alur kerja monitoring dari perumusan desain konseptual hingga integrasi sistem WhatsApp, pemrosesan kecerdasan buatan, dan peluncuran dasbor terpusat di lapangan.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================= -->
+  <!-- SECTION 1: 15-SECOND RAPID EXECUTIVE SCAN (ARCHITECTURAL TILES)   -->
+  <!-- ================================================================= -->
+  <section id="clarity-grid" class="max-w-7xl mx-auto px-4 sm:px-8 pt-12">
+    <div class="flex items-end justify-between hairline-b pb-4 mb-8">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-widest text-mono-600 block mb-1">BAGIAN 01</span>
+        <h2 class="font-serif font-bold text-2xl sm:text-3xl text-mono-black tracking-tight uppercase">
+          Pahami Perjalanan Proyek Dalam 15 Detik
+        </h2>
+      </div>
+      <span class="font-mono text-xs text-mono-600 uppercase hidden sm:inline-block">5 Pertanyaan Pimpinan Program</span>
+    </div>
+
+    <!-- 5 Stark Columns with Hairline Borders -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 hairline-all divide-y sm:divide-y-0 sm:divide-x divide-mono-black bg-mono-white">
+      
+      <!-- Card 1 -->
+      <div class="p-6 flex flex-col justify-between hover:bg-mono-50 transition-colors group">
+        <div>
+          <div class="font-mono text-[11px] text-mono-600 uppercase tracking-wider mb-3 flex items-center justify-between">
+            <span>[ Q1 / STATUS ]</span>
+            <span>N° 01</span>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-mono-black uppercase tracking-tight mb-2">
+            7 FASE BERURUTAN
+          </h3>
+          <p class="font-sans text-xs text-mono-800 leading-relaxed">
+            Perjalanan terstruktur dari kesepakatan desain, infrastruktur, WhatsApp, hingga evaluasi bersama.
+          </p>
+        </div>
+        <div class="mt-6 pt-3 hairline-t font-mono text-[10px] text-mono-600 uppercase tracking-wider">
+          Alur Terpadu
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="p-6 flex flex-col justify-between hover:bg-mono-50 transition-colors group">
+        <div>
+          <div class="font-mono text-[11px] text-mono-600 uppercase tracking-wider mb-3 flex items-center justify-between">
+            <span>[ Q2 / FOKUS ]</span>
+            <span>N° 02</span>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-mono-black uppercase tracking-tight mb-2">
+            WA + AI + DASHBOARD
+          </h3>
+          <p class="font-sans text-xs text-mono-800 leading-relaxed">
+            Peserta merespons kuesioner via WhatsApp resmi, AI merangkum makna percakapan, tim memantau di dasbor.
+          </p>
+        </div>
+        <div class="mt-6 pt-3 hairline-t font-mono text-[10px] text-mono-600 uppercase tracking-wider">
+          Tiga Pilar Inti
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="p-6 flex flex-col justify-between hover:bg-mono-50 transition-colors group">
+        <div>
+          <div class="font-mono text-[11px] text-mono-600 uppercase tracking-wider mb-3 flex items-center justify-between">
+            <span>[ Q3 / MANFAAT ]</span>
+            <span>N° 03</span>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-mono-black uppercase tracking-tight mb-2">
+            DATA CEPAT &amp; RAPI
+          </h3>
+          <p class="font-sans text-xs text-mono-800 leading-relaxed">
+            Teks serta pesan suara (voice note) peserta diproses otomatis menjadi laporan terstruktur tanpa rekap manual.
+          </p>
+        </div>
+        <div class="mt-6 pt-3 hairline-t font-mono text-[10px] text-mono-600 uppercase tracking-wider">
+          Efisiensi M&amp;E
+        </div>
+      </div>
+
+      <!-- Card 4: STARK INVERTED BLACK TILE (GO-LIVE) -->
+      <div class="p-6 bg-mono-black text-mono-white flex flex-col justify-between relative overflow-hidden group">
+        <div>
+          <div class="font-mono text-[11px] text-mono-400 uppercase tracking-wider mb-3 flex items-center justify-between">
+            <span class="text-mono-white font-bold flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 bg-mono-white inline-block"></span>
+              [ Q4 / TARGET ]
+            </span>
+            <span>N° 04</span>
+          </div>
+          <div class="font-serif font-black text-xl text-mono-white uppercase tracking-tight leading-tight mb-2">
+            25 SEPTEMBER 2026
+          </div>
+          <p class="font-sans text-xs text-mono-200 leading-relaxed">
+            Initial Live System resmi meluncur di production, siap diuji dan digunakan langsung bersama The Asia Foundation.
+          </p>
+        </div>
+        <div class="mt-6 pt-3 border-t border-mono-800 font-mono text-[10px] text-mono-white font-bold uppercase tracking-wider flex items-center justify-between">
+          <span>INITIAL RELEASE</span>
+          <span>★ GO LIVE</span>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="p-6 flex flex-col justify-between hover:bg-mono-50 transition-colors group">
+        <div>
+          <div class="font-mono text-[11px] text-mono-600 uppercase tracking-wider mb-3 flex items-center justify-between">
+            <span>[ Q5 / EVALUASI ]</span>
+            <span>N° 05</span>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-mono-black uppercase tracking-tight mb-2">
+            UAT &amp; STABILISASI
+          </h3>
+          <p class="font-sans text-xs text-mono-800 leading-relaxed">
+            Mulai 26 September: uji coba penerimaan pengguna (UAT), penanganan isu cepat, dan penyempurnaan berkala.
+          </p>
+        </div>
+        <div class="mt-6 pt-3 hairline-t font-mono text-[10px] text-mono-600 uppercase tracking-wider">
+          Penjaminan Kualitas
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================================================================= -->
+  <!-- SECTION 2: EDITORIAL LINEAR JOURNEY (8 STEP ARCHITECTURAL SEQUENCE)-->
+  <!-- ================================================================= -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-8 pt-16">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between hairline-b pb-4 mb-8 gap-2">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-widest text-mono-600 block mb-1">BAGIAN 02</span>
+        <h2 class="font-serif font-bold text-2xl sm:text-3xl text-mono-black tracking-tight uppercase">
+          Alur Rangkaian Pembangunan
+        </h2>
+      </div>
+      <span class="font-mono text-xs text-mono-600 uppercase">Pilih Tahap Untuk Menuju Penjelasan Detail</span>
+    </div>
+
+    <!-- 8-Step Architectural Strip -->
+    <div class="overflow-x-auto pb-2">
+      <div class="min-w-[1000px] grid grid-cols-8 hairline-all divide-x divide-mono-black bg-mono-white">
+        
+        <!-- Step 1 -->
+        <button onclick="jumpToPhase(1)" class="p-4 text-left hover-invert transition-colors flex flex-col justify-between group h-36">
+          <div class="font-mono text-[10px] tracking-widest text-mono-600 group-hover:text-mono-white flex justify-between">
+            <span>[01]</span>
+            <span>1-3 SEP</span>
+          </div>
+          <div>
+            <div class="font-serif font-bold text-sm uppercase">RENCANA</div>
+            <p class="font-sans text-[11px] text-mono-600 group-hover:text-mono-200 mt-1 leading-snug">Kebutuhan & alur dashboard</p>
+          </div>
+          <span class="font-mono text-[9px] uppercase tracking-wider font-semibold">Fondasi →</span>
+        </button>
+
+        <!-- Step 2 -->
+        <button onclick="jumpToPhase(2)" class="p-4 text-left hover-invert transition-colors flex flex-col justify-between group h-36">
+          <div class="font-mono text-[10px] tracking-widest text-mono-600 group-hover:text-mono-white flex justify-between">
+            <span>[02]</span>
+            <span>4-9 SEP</span>
+          </div>
+          <div>
+            <div class="font-serif font-bold text-sm uppercase">PERSIAPAN</div>
+            <p class="font-sans text-[11px] text-mono-600 group-hover:text-mono-200 mt-1 leading-snug">Server & basis data aman</p>
+          </div>
+          <span class="font-mono text-[9px] uppercase tracking-wider font-semibold">Infrastruktur →</span>
+        </button>
+
+        <!-- Step 3 -->
+        <button onclick="jumpToPhase(3)" class="p-4 text-left hover-invert transition-colors flex flex-col justify-between group h-36">
+          <div class="font-mono text-[10px] tracking-widest text-mono-600 group-hover:text-mono-white flex justify-between">
+            <span>[03]</span>
+            <span>10-12 SEP</span>
+          </div>
+          <div>
+            <div class="font-serif font-bold text-sm uppercase">APLIKASI</div>
+            <p class="font-sans text-[11px] text-mono-600 group-hover:text-mono-200 mt-1 leading-snug">Kelola pengguna & hak akses</p>
+          </div>
+          <span class="font-mono text-[9px] uppercase tracking-wider font-semibold">Sistem Inti →</span>
+        </button>
+
+        <!-- Step 4 -->
+        <button onclick="jumpToPhase(4)" class="p-4 text-left hover-invert transition-colors flex flex-col justify-between group h-36">
+          <div class="font-mono text-[10px] tracking-widest text-mono-600 group-hover:text-mono-white flex justify-between">
+            <span>[04]</span>
+            <span>13-17 SEP</span>
+          </div>
+          <div>
+            <div class="font-serif font-bold text-sm uppercase">WHATSAPP</div>
+            <p class="font-sans text-[11px] text-mono-600 group-hover:text-mono-200 mt-1 leading-snug">Pulse Check & pengingat</p>
+          </div>
+          <span class="font-mono text-[9px] uppercase tracking-wider font-semibold">Komunikasi →</span>
+        </button>
+
+        <!-- Step 5 -->
+        <button onclick="jumpToPhase(5)" class="p-4 text-left hover-invert transition-colors flex flex-col justify-between group h-36">
+          <div class="font-mono text-[10px] tracking-widest text-mono-600 group-hover:text-mono-white flex justify-between">
+            <span>[05]</span>
+            <span>18-22 SEP</span>
+          </div>
+          <div>
+            <div class="font-serif font-bold text-sm uppercase">AI &amp; ILMU</div>
+            <p class="font-sans text-[11px] text-mono-600 group-hover:text-mono-200 mt-1 leading-snug">Respon teks & voice note</p>
+          </div>
+          <span class="font-mono text-[9px] uppercase tracking-wider font-semibold">Kecerdasan →</span>
+        </button>
+
+        <!-- Step 6 -->
+        <button onclick="jumpToPhase(6)" class="p-4 text-left hover-invert transition-colors flex flex-col justify-between group h-36">
+          <div class="font-mono text-[10px] tracking-widest text-mono-600 group-hover:text-mono-white flex justify-between">
+            <span>[06]</span>
+            <span>23-24 SEP</span>
+          </div>
+          <div>
+            <div class="font-serif font-bold text-sm uppercase">DASHBOARD &amp; QC</div>
+            <p class="font-sans text-[11px] text-mono-600 group-hover:text-mono-200 mt-1 leading-snug">Filter, ekspor & uji aman</p>
+          </div>
+          <span class="font-mono text-[9px] uppercase tracking-wider font-semibold">Penyelesaian →</span>
+        </button>
+
+        <!-- Step 7: STARK INVERTED RELEASE -->
+        <button onclick="jumpToMilestone()" class="p-4 text-left bg-mono-black text-mono-white hover:bg-mono-white hover:text-mono-black transition-colors flex flex-col justify-between group h-36 relative">
+          <div class="font-mono text-[10px] tracking-widest text-mono-400 group-hover:text-mono-600 flex justify-between">
+            <span>[07]</span>
+            <span class="font-bold text-mono-white group-hover:text-mono-black">★ LIVE</span>
+          </div>
+          <div>
+            <div class="font-serif font-black text-sm uppercase tracking-wider">RELEASE</div>
+            <p class="font-sans text-[11px] text-mono-200 group-hover:text-mono-800 mt-1 leading-snug font-medium">25 Sep Production</p>
+          </div>
+          <span class="font-mono text-[9px] uppercase tracking-wider font-bold">Milestone Utama ★</span>
+        </button>
+
+        <!-- Step 8 -->
+        <button onclick="jumpToPhase(7)" class="p-4 text-left hover-invert transition-colors flex flex-col justify-between group h-36">
+          <div class="font-mono text-[10px] tracking-widest text-mono-600 group-hover:text-mono-white flex justify-between">
+            <span>[08]</span>
+            <span>26 SEP +</span>
+          </div>
+          <div>
+            <div class="font-serif font-bold text-sm uppercase">UAT &amp; EVAL</div>
+            <p class="font-sans text-[11px] text-mono-600 group-hover:text-mono-200 mt-1 leading-snug">Uji tim TAF di lapangan</p>
+          </div>
+          <span class="font-mono text-[9px] uppercase tracking-wider font-semibold">Stabilisasi →</span>
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================= -->
+  <!-- SECTION 3: SEPTEMBER 2026 EDITORIAL CALENDAR GRID                 -->
+  <!-- ================================================================= -->
+  <section id="calendar-view" class="max-w-7xl mx-auto px-4 sm:px-8 pt-16 space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between hairline-b pb-4 gap-4">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-widest text-mono-600 block mb-1">BAGIAN 03</span>
+        <h2 class="font-serif font-bold text-2xl sm:text-4xl text-mono-black tracking-tight uppercase">
+          Kalender Bulanan // September 2026
+        </h2>
+      </div>
+
+      <!-- Austere Legend -->
+      <div class="flex flex-wrap gap-3 font-mono text-[11px] uppercase tracking-wider text-mono-800">
+        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-mono-white hairline-all"></span> Hari Kerja</span>
+        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-mono-100"></span> Akhir Pekan</span>
+        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 bg-mono-black"></span> 25 Sep: Milestone Utama</span>
+      </div>
+    </div>
+
+    <!-- Calendar Matrix Layout -->
+    <div class="hairline-thick bg-mono-white shadow-sm overflow-hidden">
+      
+      <!-- Weekday Headers -->
+      <div class="grid grid-cols-7 hairline-b bg-mono-black text-mono-white font-mono text-xs uppercase tracking-widest text-center py-3">
+        <div class="text-mono-400">MIN</div>
+        <div>SEN</div>
+        <div>SEL</div>
+        <div>RAB</div>
+        <div>KAM</div>
+        <div>JUM</div>
+        <div class="text-mono-400">SAB</div>
+      </div>
+
+      <!-- 35 Calendar Cells (Sep 1, 2026 is Tuesday) -->
+      <div class="grid grid-cols-7 divide-x divide-y divide-mono-black font-sans text-xs">
+        
+        <!-- Row 1: Aug 30 - Sep 5 -->
+        <div class="min-h-[105px] p-3 bg-mono-50 text-mono-400 font-mono">
+          <span class="text-sm">30</span>
+        </div>
+        <div class="min-h-[105px] p-3 bg-mono-50 text-mono-400 font-mono">
+          <span class="text-sm">31</span>
+        </div>
+        
+        <!-- 01 Sep (Tue) - Fase 1 -->
+        <div onclick="jumpToPhase(1)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">01</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 1</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Kickoff &amp; finalisasi kebutuhan sistem
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Perencanaan</span>
+        </div>
+
+        <!-- 02 Sep (Wed) - Fase 1 -->
+        <div onclick="jumpToPhase(1)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">02</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 1</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Penyelarasan alur kerja &amp; mockup dashboard
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Review Desain</span>
+        </div>
+
+        <!-- 03 Sep (Thu) - Fase 1 End -->
+        <div onclick="jumpToPhase(1)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">03</span>
+            <span class="text-[9px] px-1.5 py-0.5 bg-mono-black text-mono-white uppercase font-bold">ACC</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Arah sistem &amp; desain disepakati
+          </div>
+          <span class="font-mono text-[9px] font-bold uppercase tracking-wider">✓ Desain Final</span>
+        </div>
+
+        <!-- 04 Sep (Fri) - Fase 2 -->
+        <div onclick="jumpToPhase(2)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">04</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 2</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Penyiapan domain resmi &amp; server aman
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Infrastruktur</span>
+        </div>
+
+        <!-- 05 Sep (Sat) -->
+        <div onclick="jumpToPhase(2)" class="min-h-[105px] p-3 bg-mono-50 hover:bg-mono-100 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-600">05</span>
+            <span class="text-[9px] text-mono-400 uppercase">SAB</span>
+          </div>
+          <div class="text-[11px] text-mono-600 leading-snug">
+            Penyimpanan data &amp; lingkungan aplikasi
+          </div>
+          <span class="font-mono text-[9px] text-mono-400 uppercase">Konfigurasi</span>
+        </div>
+
+        <!-- Row 2: Sep 6 - Sep 12 -->
+        <!-- 06 Sep (Sun) -->
+        <div class="min-h-[105px] p-3 bg-mono-100 text-mono-400 font-mono flex flex-col justify-between">
+          <div class="flex justify-between">
+            <span class="font-bold text-sm">06</span>
+            <span class="text-[9px] uppercase">MINGGU</span>
+          </div>
+          <span class="text-[10px] text-mono-400">—</span>
+        </div>
+
+        <!-- 07 Sep (Mon) - Fase 2 -->
+        <div onclick="jumpToPhase(2)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">07</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 2</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Sistem pemrosesan pesan kapasitas tinggi
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Jalur Pesan</span>
+        </div>
+
+        <!-- 08 Sep (Tue) - Fase 2 -->
+        <div onclick="jumpToPhase(2)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">08</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 2</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Ketahanan sistem &amp; proteksi data
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Uji Keandalan</span>
+        </div>
+
+        <!-- 09 Sep (Wed) - Fase 2 End -->
+        <div onclick="jumpToPhase(2)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">09</span>
+            <span class="text-[9px] px-1.5 py-0.5 bg-mono-black text-mono-white uppercase font-bold">ACC</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Fondasi teknologi siap digunakan
+          </div>
+          <span class="font-mono text-[9px] font-bold uppercase tracking-wider">✓ Infra Selesai</span>
+        </div>
+
+        <!-- 10 Sep (Thu) - Fase 3 Start -->
+        <div onclick="jumpToPhase(3)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">10</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 3</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Membangun struktur inti aplikasi
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Aplikasi Inti</span>
+        </div>
+
+        <!-- 11 Sep (Fri) - Fase 3 -->
+        <div onclick="jumpToPhase(3)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">11</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 3</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Pengelolaan pengguna &amp; pembagian peran
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Hak Akses</span>
+        </div>
+
+        <!-- 12 Sep (Sat) - Fase 3 End -->
+        <div onclick="jumpToPhase(3)" class="min-h-[105px] p-3 bg-mono-50 hover:bg-mono-100 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-600">12</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 3</span>
+          </div>
+          <div class="text-[11px] text-mono-600 leading-snug">
+            Kerangka dashboard &amp; login aktif
+          </div>
+          <span class="font-mono text-[9px] font-bold uppercase tracking-wider">✓ Portal Siap</span>
+        </div>
+
+        <!-- Row 3: Sep 13 - Sep 19 -->
+        <!-- 13 Sep (Sun) - Fase 4 Start -->
+        <div onclick="jumpToPhase(4)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">13</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 4</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Koneksi WhatsApp resmi terhubung
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">WhatsApp Connect</span>
+        </div>
+
+        <!-- 14 Sep (Mon) - Fase 4 -->
+        <div onclick="jumpToPhase(4)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">14</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 4</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Pengiriman &amp; penerimaan pesan dua arah
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Uji Komunikasi</span>
+        </div>
+
+        <!-- 15 Sep (Tue) - Fase 4 -->
+        <div onclick="jumpToPhase(4)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">15</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 4</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Basis data peserta &amp; pendaftaran monitoring
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Data Peserta</span>
+        </div>
+
+        <!-- 16 Sep (Wed) - Fase 4 -->
+        <div onclick="jumpToPhase(4)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">16</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 4</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Jadwal Pulse Check &amp; reminder otomatis
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Pengingat Auto</span>
+        </div>
+
+        <!-- 17 Sep (Thu) - Fase 4 End -->
+        <div onclick="jumpToPhase(4)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">17</span>
+            <span class="text-[9px] px-1.5 py-0.5 bg-mono-black text-mono-white uppercase font-bold">MILESTONE</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Sistem pesan &amp; pelacakan status selesai
+          </div>
+          <span class="font-mono text-[9px] font-bold uppercase tracking-wider">✓ WA Monitoring Ready</span>
+        </div>
+
+        <!-- 18 Sep (Fri) - Fase 5 Start (AI) -->
+        <div onclick="jumpToPhase(5)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">18</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 5</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Aktivasi AI membaca respon peserta
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Kecerdasan AI</span>
+        </div>
+
+        <!-- 19 Sep (Sat) - Fase 5 -->
+        <div onclick="jumpToPhase(5)" class="min-h-[105px] p-3 bg-mono-50 hover:bg-mono-100 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-600">19</span>
+            <span class="text-[9px] text-mono-400 uppercase">SAB</span>
+          </div>
+          <div class="text-[11px] text-mono-600 leading-snug">
+            AI memahami riwayat percakapan peserta
+          </div>
+          <span class="font-mono text-[9px] text-mono-400 uppercase">Konteks Memori</span>
+        </div>
+
+        <!-- Row 4: Sep 20 - Sep 26 -->
+        <!-- 20 Sep (Sun) - Fase 5 -->
+        <div onclick="jumpToPhase(5)" class="min-h-[105px] p-3 bg-mono-100 hover:bg-mono-200 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between font-mono">
+            <span class="font-bold text-sm text-mono-600">20</span>
+            <span class="text-[9px] text-mono-400 uppercase">MIN</span>
+          </div>
+          <div class="text-[11px] text-mono-600 leading-snug">
+            Penyelarasan AI dengan materi IN-CLIMATE
+          </div>
+          <span class="font-mono text-[9px] text-mono-400 uppercase">Materi Program</span>
+        </div>
+
+        <!-- 21 Sep (Mon) - Fase 5 -->
+        <div onclick="jumpToPhase(5)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">21</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 5</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            AI memproses pesan suara / voice note
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Audio Ke Teks</span>
+        </div>
+
+        <!-- 22 Sep (Tue) - Fase 5 End -->
+        <div onclick="jumpToPhase(5)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">22</span>
+            <span class="text-[9px] px-1.5 py-0.5 bg-mono-black text-mono-white uppercase font-bold">MILESTONE</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Respons peserta terkonversi jadi data monitoring
+          </div>
+          <span class="font-mono text-[9px] font-bold uppercase tracking-wider">✓ AI Monitoring Ready</span>
+        </div>
+
+        <!-- 23 Sep (Wed) - Fase 6A -->
+        <div onclick="jumpToPhase(6)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">23</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 6A</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Dashboard selesai: filter, insight &amp; ekspor data
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Layar Dasbor</span>
+        </div>
+
+        <!-- 24 Sep (Thu) - Fase 6B -->
+        <div onclick="jumpToPhase(6)" class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black group-hover:underline">24</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 6B</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Pemeriksaan menyeluruh &amp; perlindungan data
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Quality &amp; Security</span>
+        </div>
+
+        <!-- 25 Sep (Fri) - MAJOR MILESTONE // PURE BLACK INVERSION -->
+        <div onclick="jumpToMilestone()" class="min-h-[105px] p-3 bg-mono-black text-mono-white hover:bg-mono-900 cursor-pointer transition-all flex flex-col justify-between relative">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-serif font-black text-base text-mono-white">25</span>
+            <span class="text-[9px] bg-mono-white text-mono-black px-1.5 py-0.5 font-bold tracking-widest uppercase">
+              GO LIVE
+            </span>
+          </div>
+          <div class="font-serif font-bold text-xs uppercase text-mono-white tracking-wide leading-tight">
+            INITIAL LIVE SYSTEM
+          </div>
+          <span class="font-mono text-[9px] text-mono-300 font-bold uppercase tracking-wider flex items-center gap-1">
+            <span>■</span> Target Rilis Utama
+          </span>
+        </div>
+
+        <!-- 26 Sep (Sat) - Fase 7 -->
+        <div onclick="jumpToPhase(7)" class="min-h-[105px] p-3 bg-mono-50 hover:bg-mono-100 cursor-pointer transition-colors flex flex-col justify-between group">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black">26</span>
+            <span class="text-[9px] px-1.5 py-0.5 hairline-all uppercase font-semibold">FASE 7</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Stabilisasi &amp; persiapan UAT bersama TAF
+          </div>
+          <span class="font-mono text-[9px] font-bold uppercase tracking-wider">Siap UAT</span>
+        </div>
+
+        <!-- Row 5: Sep 27 - Sep 30 -->
+        <!-- 27 Sep (Sun) -->
+        <div class="min-h-[105px] p-3 bg-mono-100 text-mono-400 font-mono flex flex-col justify-between">
+          <div class="flex justify-between">
+            <span class="font-bold text-sm">27</span>
+            <span class="text-[9px] uppercase">MINGGU</span>
+          </div>
+          <span class="text-[10px] text-mono-400">Pemantauan Performa</span>
+        </div>
+
+        <!-- 28 Sep (Mon) -->
+        <div class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black">28</span>
+            <span class="text-[9px] hairline-all px-1">UAT</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Pencatatan masukan &amp; evaluasi awal sistem
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Iterasi Umpan Balik</span>
+        </div>
+
+        <!-- 29 Sep (Tue) -->
+        <div class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black">29</span>
+            <span class="text-[9px] hairline-all px-1">UAT</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Verifikasi format laporan kebutuhan M&amp;E
+          </div>
+          <span class="font-mono text-[9px] text-mono-600 uppercase tracking-wider">Validasi Data</span>
+        </div>
+
+        <!-- 30 Sep (Wed) -->
+        <div class="min-h-[105px] p-3 bg-mono-white hover:bg-mono-50 cursor-pointer transition-colors flex flex-col justify-between">
+          <div class="flex justify-between items-start font-mono">
+            <span class="font-bold text-sm text-mono-black">30</span>
+            <span class="text-[9px] bg-mono-black text-mono-white px-1 font-bold">AKHIR</span>
+          </div>
+          <div class="text-[11px] text-mono-800 leading-snug">
+            Sistem beroperasi stabil menutup siklus September
+          </div>
+          <span class="font-mono text-[9px] font-bold uppercase tracking-wider">✓ Siklus Selesai</span>
+        </div>
+
+        <!-- Next Month Oct 1 - 3 -->
+        <div class="min-h-[105px] p-3 bg-mono-50 text-mono-400 font-mono">
+          <span class="text-sm">01 OKT</span>
+        </div>
+        <div class="min-h-[105px] p-3 bg-mono-50 text-mono-400 font-mono">
+          <span class="text-sm">02 OKT</span>
+        </div>
+        <div class="min-h-[105px] p-3 bg-mono-50 text-mono-400 font-mono">
+          <span class="text-sm">03 OKT</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================= -->
+  <!-- SECTION 4: 25 SEPTEMBER 2026 // MONUMENTAL MILESTONE SHOWCASE     -->
+  <!-- ================================================================= -->
+  <section id="milestone-block" class="max-w-7xl mx-auto px-4 sm:px-8 pt-16">
+    <div class="hairline-heavy bg-mono-black text-mono-white p-8 sm:p-14 relative overflow-hidden">
+      
+      <!-- Monograph Watermark Text -->
+      <div class="absolute -right-10 -bottom-10 font-serif font-black text-[16vw] text-mono-900 select-none pointer-events-none leading-none opacity-40">
+        RELEASE
+      </div>
+
+      <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
+        
+        <div class="space-y-6 max-w-3xl">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="px-3 py-1 bg-mono-white text-mono-black font-mono font-bold text-xs uppercase tracking-widest">
+              ★ MILESTONE UTAMA PROYEK
+            </span>
+            <span class="font-mono text-xs text-mono-400 tracking-wider uppercase">
+              JUMAT, 25 SEPTEMBER 2026
+            </span>
+          </div>
+
+          <h2 class="font-serif font-black text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight leading-[0.95]">
+            INITIAL <span class="italic font-normal text-mono-300">LIVE</span> SYSTEM
+          </h2>
+
+          <p class="font-serif text-base sm:text-xl text-mono-200 leading-relaxed font-normal max-w-2xl">
+            WhatsApp + AI + Dashboard siap digunakan untuk penggunaan awal dan testing bersama <span class="text-mono-white font-semibold underline underline-offset-4">The Asia Foundation</span>. Seluruh modul inti telah dipindahkan dari lingkungan pengujian ke sistem live production.
+          </p>
+
+          <!-- 6 Human Deliverables in Editorial Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 pt-4 border-t border-mono-800">
+            <div class="p-3.5 hairline-all border-mono-800 bg-mono-900 flex items-start gap-2.5">
+              <span class="font-mono text-xs font-bold text-mono-400">[01]</span>
+              <span class="font-sans text-xs text-mono-white leading-snug">Registrasi Peserta Terdata</span>
+            </div>
+            <div class="p-3.5 hairline-all border-mono-800 bg-mono-900 flex items-start gap-2.5">
+              <span class="font-mono text-xs font-bold text-mono-400">[02]</span>
+              <span class="font-sans text-xs text-mono-white leading-snug">Pulse Check Terjadwal Otomatis</span>
+            </div>
+            <div class="p-3.5 hairline-all border-mono-800 bg-mono-900 flex items-start gap-2.5">
+              <span class="font-mono text-xs font-bold text-mono-400">[03]</span>
+              <span class="font-sans text-xs text-mono-white leading-snug">Pengingat &amp; Reminder Pesan</span>
+            </div>
+            <div class="p-3.5 hairline-all border-mono-800 bg-mono-900 flex items-start gap-2.5">
+              <span class="font-mono text-xs font-bold text-mono-400">[04]</span>
+              <span class="font-sans text-xs text-mono-white leading-snug">Riwayat Percakapan Tersimpan Aman</span>
+            </div>
+            <div class="p-3.5 hairline-all border-mono-800 bg-mono-900 flex items-start gap-2.5">
+              <span class="font-mono text-xs font-bold text-mono-400">[05]</span>
+              <span class="font-sans text-xs text-mono-white leading-snug">Analisis Respons Berbantuan AI</span>
+            </div>
+            <div class="p-3.5 hairline-all border-mono-800 bg-mono-900 flex items-start gap-2.5">
+              <span class="font-mono text-xs font-bold text-mono-400">[06]</span>
+              <span class="font-sans text-xs text-mono-white leading-snug">Layar Dasbor &amp; Laporan Awal</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stark Monolith Status Block -->
+        <div class="w-full lg:w-auto bg-mono-white text-mono-black p-8 text-center shrink-0 flex flex-col items-center justify-center space-y-4 hairline-thick">
+          <div class="font-mono text-[11px] uppercase tracking-widest text-mono-600">
+            STATUS KESIAPAN
+          </div>
+          <div class="font-serif font-black text-xl sm:text-2xl uppercase leading-tight tracking-tight border-y border-mono-black py-3 px-4">
+            READY FOR INITIAL<br>USE &amp; TESTING
+          </div>
+          <p class="font-sans text-xs text-mono-800 max-w-[220px] leading-relaxed">
+            Sistem dapat diakses langsung oleh tim PIC program untuk evaluasi lapangan.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================= -->
+  <!-- SECTION 5: 7 PROJECT PHASES (EDITORIAL DOSSIER CARDS)             -->
+  <!-- ================================================================= -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-8 pt-16 space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between hairline-b pb-4 gap-2">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-widest text-mono-600 block mb-1">BAGIAN 04</span>
+        <h2 class="font-serif font-bold text-2xl sm:text-3xl text-mono-black tracking-tight uppercase">
+          7 Fase Pembangunan Sistem // Rincian Lengkap
+        </h2>
+      </div>
+      <p class="font-mono text-xs text-mono-600 uppercase">
+        Bahasa Berbasis Tujuan, Aktivitas, dan Hasil Nyata
+      </p>
+    </div>
+
+    <!-- Phase Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- FASE 1 -->
+      <div id="phase-detail-1" class="phase-card hairline-all bg-mono-white p-7 flex flex-col justify-between hover:border-mono-black transition-all">
+        <div>
+          <div class="flex items-center justify-between font-mono text-xs pb-3 mb-4 hairline-b">
+            <span class="font-bold text-mono-black uppercase tracking-wider">[FASE 01]</span>
+            <span class="bg-mono-black text-mono-white px-2 py-0.5 text-[11px] font-bold">1–3 SEP 2026</span>
+          </div>
+
+          <h3 class="font-serif font-bold text-xl text-mono-black uppercase tracking-tight mb-4">
+            Perencanaan &amp; Desain
+          </h3>
+
+          <div class="space-y-2 mb-6">
+            <div class="font-mono text-[11px] uppercase tracking-wider text-mono-600">// FOKUS UTAMA:</div>
+            <ul class="font-sans text-xs text-mono-800 space-y-2 list-disc list-inside">
+              <li>Finalisasi kebutuhan sistem monitoring</li>
+              <li>Penyelarasan alur kerja kuesioner</li>
+              <li>Penentuan tampilan layar dashboard</li>
+              <li>Penyiapan fondasi pengembangan</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="p-4 bg-mono-50 hairline-l hairline-thick">
+          <div class="font-mono text-[10px] uppercase tracking-wider font-bold text-mono-600 mb-1">// HASIL / OUTCOME:</div>
+          <p class="font-sans text-xs text-mono-black leading-relaxed font-medium">
+            Arah sistem dan desain dashboard siap digunakan sebagai dasar pembangunan.
+          </p>
+        </div>
+      </div>
+
+      <!-- FASE 2 -->
+      <div id="phase-detail-2" class="phase-card hairline-all bg-mono-white p-7 flex flex-col justify-between hover:border-mono-black transition-all">
+        <div>
+          <div class="flex items-center justify-between font-mono text-xs pb-3 mb-4 hairline-b">
+            <span class="font-bold text-mono-black uppercase tracking-wider">[FASE 02]</span>
+            <span class="bg-mono-black text-mono-white px-2 py-0.5 text-[11px] font-bold">4–9 SEP 2026</span>
+          </div>
+
+          <h3 class="font-serif font-bold text-xl text-mono-black uppercase tracking-tight mb-4">
+            Persiapan Infrastruktur
+          </h3>
+
+          <div class="space-y-2 mb-6">
+            <div class="font-mono text-[11px] uppercase tracking-wider text-mono-600">// FOKUS UTAMA:</div>
+            <ul class="font-sans text-xs text-mono-800 space-y-2 list-disc list-inside">
+              <li>Menyiapkan domain resmi dan server aman</li>
+              <li>Menyiapkan lingkungan aplikasi siap pakai</li>
+              <li>Menyiapkan ruang penyimpanan data aman</li>
+              <li>Menyiapkan sistem pemrosesan pesan kapasitas tinggi</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="p-4 bg-mono-50 hairline-l hairline-thick">
+          <div class="font-mono text-[10px] uppercase tracking-wider font-bold text-mono-600 mb-1">// HASIL / OUTCOME:</div>
+          <p class="font-sans text-xs text-mono-black leading-relaxed font-medium">
+            Fondasi teknologi siap digunakan oleh aplikasi secara stabil dan andal.
+          </p>
+        </div>
+      </div>
+
+      <!-- FASE 3 -->
+      <div id="phase-detail-3" class="phase-card hairline-all bg-mono-white p-7 flex flex-col justify-between hover:border-mono-black transition-all">
+        <div>
+          <div class="flex items-center justify-between font-mono text-xs pb-3 mb-4 hairline-b">
+            <span class="font-bold text-mono-black uppercase tracking-wider">[FASE 03]</span>
+            <span class="bg-mono-black text-mono-white px-2 py-0.5 text-[11px] font-bold">10–12 SEP 2026</span>
+          </div>
+
+          <h3 class="font-serif font-bold text-xl text-mono-black uppercase tracking-tight mb-4">
+            Pembangunan Aplikasi Inti
+          </h3>
+
+          <div class="space-y-2 mb-6">
+            <div class="font-mono text-[11px] uppercase tracking-wider text-mono-600">// FOKUS UTAMA:</div>
+            <ul class="font-sans text-xs text-mono-800 space-y-2 list-disc list-inside">
+              <li>Membangun struktur inti aplikasi &amp; alur logika</li>
+              <li>Menyiapkan pengelolaan pengguna &amp; otentikasi</li>
+              <li>Menyiapkan pembagian peran &amp; hak akses admin</li>
+              <li>Membangun kerangka dasar dashboard monitoring</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="p-4 bg-mono-50 hairline-l hairline-thick">
+          <div class="font-mono text-[10px] uppercase tracking-wider font-bold text-mono-600 mb-1">// HASIL / OUTCOME:</div>
+          <p class="font-sans text-xs text-mono-black leading-relaxed font-medium">
+            Aplikasi inti dan dashboard dasar mulai dapat digunakan dan diakses.
+          </p>
+        </div>
+      </div>
+
+      <!-- FASE 4 -->
+      <div id="phase-detail-4" class="phase-card hairline-all bg-mono-white p-7 flex flex-col justify-between hover:border-mono-black transition-all">
+        <div>
+          <div class="flex items-center justify-between font-mono text-xs pb-3 mb-4 hairline-b">
+            <span class="font-bold text-mono-black uppercase tracking-wider">[FASE 04]</span>
+            <span class="bg-mono-black text-mono-white px-2 py-0.5 text-[11px] font-bold">13–17 SEP 2026</span>
+          </div>
+
+          <h3 class="font-serif font-bold text-xl text-mono-black uppercase tracking-tight mb-4">
+            WhatsApp &amp; Campaign
+          </h3>
+
+          <div class="space-y-2 mb-6">
+            <div class="font-mono text-[11px] uppercase tracking-wider text-mono-600">// FOKUS UTAMA:</div>
+            <ul class="font-sans text-xs text-mono-800 space-y-2 list-disc list-inside">
+              <li>Menghubungkan sistem dengan WhatsApp resmi</li>
+              <li>Menyiapkan penerimaan dan pengiriman pesan</li>
+              <li>Menyiapkan peserta monitoring &amp; jadwal Pulse Check</li>
+              <li>Menyiapkan reminder otomatis &amp; pelacakan status</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="p-4 bg-mono-50 hairline-l hairline-thick">
+          <div class="font-mono text-[10px] uppercase tracking-wider font-bold text-mono-600 mb-1">// HASIL / OUTCOME:</div>
+          <p class="font-sans text-xs text-mono-black leading-relaxed font-medium">
+            Sistem dapat mengirim, menerima, dan menjadwalkan komunikasi monitoring peserta melalui WhatsApp.
+          </p>
+        </div>
+      </div>
+
+      <!-- FASE 5 -->
+      <div id="phase-detail-5" class="phase-card hairline-all bg-mono-white p-7 flex flex-col justify-between hover:border-mono-black transition-all">
+        <div>
+          <div class="flex items-center justify-between font-mono text-xs pb-3 mb-4 hairline-b">
+            <span class="font-bold text-mono-black uppercase tracking-wider">[FASE 05]</span>
+            <span class="bg-mono-black text-mono-white px-2 py-0.5 text-[11px] font-bold">18–22 SEP 2026</span>
+          </div>
+
+          <h3 class="font-serif font-bold text-xl text-mono-black uppercase tracking-tight mb-4">
+            AI &amp; Knowledge System
+          </h3>
+
+          <div class="space-y-2 mb-6">
+            <div class="font-mono text-[11px] uppercase tracking-wider text-mono-600">// FOKUS UTAMA:</div>
+            <ul class="font-sans text-xs text-mono-800 space-y-2 list-disc list-inside">
+              <li>Mengaktifkan AI untuk membaca respons peserta</li>
+              <li>Membuat AI memahami riwayat percakapan peserta</li>
+              <li>Menghubungkan AI dengan materi program IN-CLIMATE</li>
+              <li>Memproses pesan suara (voice note) menjadi data terstruktur</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="p-4 bg-mono-50 hairline-l hairline-thick">
+          <div class="font-mono text-[10px] uppercase tracking-wider font-bold text-mono-600 mb-1">// HASIL / OUTCOME:</div>
+          <p class="font-sans text-xs text-mono-black leading-relaxed font-medium">
+            AI dapat membantu memahami respons peserta dan menghasilkan data monitoring yang lebih terstruktur.
+          </p>
+        </div>
+      </div>
+
+      <!-- FASE 6 -->
+      <div id="phase-detail-6" class="phase-card hairline-thick bg-mono-white p-7 flex flex-col justify-between hover:bg-mono-50 transition-all">
+        <div>
+          <div class="flex items-center justify-between font-mono text-xs pb-3 mb-4 hairline-b">
+            <span class="font-bold text-mono-black uppercase tracking-wider">[FASE 06]</span>
+            <span class="bg-mono-black text-mono-white px-2 py-0.5 text-[11px] font-bold">23–25 SEP 2026</span>
+          </div>
+
+          <h3 class="font-serif font-bold text-xl text-mono-black uppercase tracking-tight mb-4">
+            Dashboard, QC &amp; Release
+          </h3>
+
+          <div class="space-y-2.5 mb-6 font-mono text-xs text-mono-800">
+            <div class="p-2.5 hairline-all bg-mono-50">
+              <span class="font-bold text-mono-black">23 SEP: Dashboard Selesai</span>
+              <p class="font-sans text-[11px] text-mono-600 mt-0.5">
+                Daftar peserta, riwayat percakapan, grafik insight, pencarian &amp; ekspor.
+              </p>
+            </div>
+            <div class="p-2.5 hairline-all bg-mono-50">
+              <span class="font-bold text-mono-black">24 SEP: Quality &amp; Security Check</span>
+              <p class="font-sans text-[11px] text-mono-600 mt-0.5">
+                Pemeriksaan alur menyeluruh, keamanan &amp; perlindungan data peserta.
+              </p>
+            </div>
+            <div class="p-2.5 bg-mono-black text-mono-white">
+              <span class="font-bold">25 SEP: PRODUCTION RELEASE ★</span>
+              <p class="font-sans text-[11px] text-mono-200 mt-0.5">
+                Initial Live System aktif dan siap uji bersama TAF.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 bg-mono-black text-mono-white">
+          <div class="font-mono text-[10px] uppercase tracking-wider font-bold text-mono-300 mb-1">// HASIL / OUTCOME:</div>
+          <p class="font-sans text-xs text-mono-white leading-relaxed font-medium">
+            Sistem awal tersedia di production dan siap masuk tahap penggunaan serta evaluasi.
+          </p>
+        </div>
+      </div>
+
+      <!-- FASE 7 -->
+      <div id="phase-detail-7" class="phase-card hairline-all bg-mono-white p-7 flex flex-col justify-between hover:border-mono-black transition-all md:col-span-2 lg:col-span-3">
+        <div>
+          <div class="flex items-center justify-between font-mono text-xs pb-3 mb-4 hairline-b">
+            <span class="font-bold text-mono-black uppercase tracking-wider">[FASE 07]</span>
+            <span class="bg-mono-black text-mono-white px-2 py-0.5 text-[11px] font-bold">26 SEPTEMBER 2026 +</span>
+          </div>
+
+          <h3 class="font-serif font-bold text-xl text-mono-black uppercase tracking-tight mb-4">
+            Stabilisasi &amp; Persiapan UAT
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <div class="font-mono text-[11px] uppercase tracking-wider text-mono-600 mb-2">// FOKUS UTAMA:</div>
+              <ul class="font-sans text-xs text-mono-800 space-y-2 list-disc list-inside">
+                <li>Memantau penggunaan awal sistem di lapangan</li>
+                <li>Memeriksa jika ada kendala respon pesan WhatsApp</li>
+                <li>Melakukan perbaikan kritis secara responsif</li>
+                <li>Menyiapkan daftar isu dan peningkatan bersama tim M&amp;E</li>
+                <li>Menyiapkan tahap User Acceptance Testing (UAT) resmi</li>
+              </ul>
+            </div>
+            <div class="p-5 bg-mono-50 hairline-all flex flex-col justify-center">
+              <span class="font-mono text-xs text-mono-black font-bold uppercase tracking-wider">// TARGET AKHIR SIKLUS:</span>
+              <p class="font-serif text-sm text-mono-800 mt-2 leading-relaxed">
+                Sistem monitoring berjalan secara ajeg, akurasi pemrosesan AI terkalibrasi, dan para PIC program siap menjalankan pemantauan secara mandiri.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 bg-mono-50 hairline-l hairline-thick">
+          <div class="font-mono text-[10px] uppercase tracking-wider font-bold text-mono-600 mb-1">// HASIL / OUTCOME:</div>
+          <p class="font-sans text-xs text-mono-black leading-relaxed font-medium">
+            Sistem lebih stabil dan siap memasuki tahap UAT serta iterasi pengembangan berikutnya.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================================================================= -->
+  <!-- SECTION 6: ARCHIVAL MILESTONES TABLE (CLEAN 5 TILES)              -->
+  <!-- ================================================================= -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-8 pt-16 pb-16">
+    <div class="flex items-end justify-between hairline-b pb-4 mb-8">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-widest text-mono-600 block mb-1">BAGIAN 05</span>
+        <h2 class="font-serif font-bold text-2xl sm:text-3xl text-mono-black tracking-tight uppercase">
+          Ringkasan Milestone Proyek
+        </h2>
+      </div>
+      <span class="font-mono text-xs text-mono-600 uppercase">Lima Titik Tolok Ukur Utama</span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 hairline-all divide-y sm:divide-y-0 sm:divide-x divide-mono-black bg-mono-white">
+      
+      <!-- M1 -->
+      <div class="p-5 flex flex-col justify-between hover:bg-mono-50 transition-colors">
+        <div>
+          <span class="font-mono text-xs font-bold text-mono-600">01–03 SEP</span>
+          <h4 class="font-serif font-bold text-base uppercase text-mono-black mt-1">Project Foundation</h4>
+          <p class="font-sans text-xs text-mono-800 mt-2 leading-relaxed">
+            Arah dan desain dashboard disahkan bersama tim program.
+          </p>
+        </div>
+        <div class="mt-4 pt-2 hairline-t font-mono text-[10px] text-mono-600 uppercase">Selesai</div>
+      </div>
+
+      <!-- M2 -->
+      <div class="p-5 flex flex-col justify-between hover:bg-mono-50 transition-colors">
+        <div>
+          <span class="font-mono text-xs font-bold text-mono-600">13–17 SEP</span>
+          <h4 class="font-serif font-bold text-base uppercase text-mono-black mt-1">WhatsApp Ready</h4>
+          <p class="font-sans text-xs text-mono-800 mt-2 leading-relaxed">
+            Kirim, terima, jadwal Pulse Check &amp; pengingat siap pakai.
+          </p>
+        </div>
+        <div class="mt-4 pt-2 hairline-t font-mono text-[10px] text-mono-600 uppercase">Siap WhatsApp</div>
+      </div>
+
+      <!-- M3 -->
+      <div class="p-5 flex flex-col justify-between hover:bg-mono-50 transition-colors">
+        <div>
+          <span class="font-mono text-xs font-bold text-mono-600">18–22 SEP</span>
+          <h4 class="font-serif font-bold text-base uppercase text-mono-black mt-1">AI Monitoring</h4>
+          <p class="font-sans text-xs text-mono-800 mt-2 leading-relaxed">
+            AI menganalisis pesan peserta dan pesan suara (voice note).
+          </p>
+        </div>
+        <div class="mt-4 pt-2 hairline-t font-mono text-[10px] text-mono-600 uppercase">Siap AI</div>
+      </div>
+
+      <!-- M4: INVERTED -->
+      <div class="p-5 bg-mono-black text-mono-white flex flex-col justify-between">
+        <div>
+          <span class="font-mono text-xs font-bold text-mono-300">25 SEP 2026</span>
+          <h4 class="font-serif font-black text-base uppercase text-mono-white mt-1">INITIAL LIVE SYSTEM</h4>
+          <p class="font-sans text-xs text-mono-200 mt-2 leading-relaxed font-normal">
+            Sistem produksi aktif di lapangan &amp; siap diuji bersama TAF.
+          </p>
+        </div>
+        <div class="mt-4 pt-2 border-t border-mono-800 font-mono text-[10px] text-mono-white font-bold uppercase tracking-wider">
+          ★ Production Live
+        </div>
+      </div>
+
+      <!-- M5 -->
+      <div class="p-5 flex flex-col justify-between hover:bg-mono-50 transition-colors">
+        <div>
+          <span class="font-mono text-xs font-bold text-mono-600">26 SEP +</span>
+          <h4 class="font-serif font-bold text-base uppercase text-mono-black mt-1">UAT Preparation</h4>
+          <p class="font-sans text-xs text-mono-800 mt-2 leading-relaxed">
+            Stabilisasi berkala &amp; uji coba bersama tim evaluasi TAF.
+          </p>
+        </div>
+        <div class="mt-4 pt-2 hairline-t font-mono text-[10px] text-mono-600 uppercase">Tahap Evaluasi</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================================================================= -->
+  <!-- EDITORIAL COLOPHON / FOOTER SIGN-OFF                              -->
+  <!-- ================================================================= -->
+  <footer class="hairline-t bg-mono-white py-12 px-4 sm:px-8 font-mono text-xs text-mono-800">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div class="space-y-1">
+        <div class="flex items-center gap-2 font-bold text-mono-black uppercase tracking-wider">
+          <span class="w-2 h-2 bg-mono-black inline-block"></span>
+          <span>IN-CLIMATE — PULSE AI MONITORING SYSTEM</span>
+        </div>
+        <p class="text-mono-600">
+          PROYEK PENGEMBANGAN SISTEM MONITORING BERBASIS WHATSAPP &amp; AI
+        </p>
+      </div>
+
+      <div class="text-left md:text-right space-y-1">
+        <div>
+          DIKEMBANGKAN OLEH <span class="text-mono-black font-bold">TERAS DIGITAL TECH</span> UNTUK <span class="text-mono-black font-bold">THE ASIA FOUNDATION</span>
+        </div>
+        <div class="text-mono-600">
+          PUBLIKASI SIKLUS SEPTEMBER 2026 // DOKUMEN IMPLEMENTASI PROYEK
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================================================================= -->
+  <!-- MINIMAL JUMP NAVIGATION JAVASCRIPT                                -->
+  <!-- ================================================================= -->
+  <script>
+    function scrollToId(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function jumpToPhase(num) {
+      const card = document.getElementById('phase-detail-' + num);
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.classList.add('ring-2', 'ring-mono-black');
+        setTimeout(() => {
+          card.classList.remove('ring-2', 'ring-mono-black');
+        }, 1400);
+      }
+    }
+
+    function jumpToMilestone() {
+      const milestone = document.getElementById('milestone-block');
+      if (milestone) {
+        milestone.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  </script>
+
+</body>
+</html>
