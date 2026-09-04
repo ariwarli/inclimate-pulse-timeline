@@ -1,0 +1,851 @@
+<title>Pulse AI Delivery Calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<script>
+  /* Terapkan pilihan tema sebelum halaman tergambar, agar tidak ada kedipan warna. */
+  (function () {
+    try {
+      var saved = localStorage.getItem("pulse-ai-theme");
+      if (saved === "light" || saved === "dark") {
+        document.documentElement.setAttribute("data-theme", saved);
+      }
+    } catch (e) { /* penyimpanan browser tidak tersedia — pakai tema sistem */ }
+  })();
+</script>
+
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #F7F4EE;
+    --surface: #FFFFFF;
+    --surface-2: #FBF9F3;
+    --border: #E3DDCE;
+    --border-soft: #ECE7DA;
+    --text: #16283A;
+    --text-muted: #6C7680;
+    --text-faint: #98A0A6;
+
+    --teal: #3F8E7C;
+    --teal-deep: #235248;
+    --teal-tint: #DFEEE7;
+    --teal-rgb: 63,142,124;
+
+    --accent: #C97A22;
+    --accent-deep: #834E10;
+    --accent-tint: #F8E6C6;
+    --accent-rgb: 201,122,34;
+
+    --neutral-rgb: 108,118,128;
+
+    --shadow: 0 1px 2px rgba(22,40,58,.06), 0 8px 24px -12px rgba(22,40,58,.12);
+    --shadow-lift: 0 4px 10px rgba(22,40,58,.08), 0 20px 40px -16px rgba(22,40,58,.20);
+    --radius: 14px;
+    --radius-sm: 9px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #10191F;
+      --surface: #17232B;
+      --surface-2: #1C2A33;
+      --border: #2B3B44;
+      --border-soft: #223039;
+      --text: #EEEAE0;
+      --text-muted: #9AACB4;
+      --text-faint: #6D7E86;
+
+      --teal: #74C4AC;
+      --teal-deep: #B7E7D6;
+      --teal-tint: #1B332E;
+      --teal-rgb: 116,196,172;
+
+      --accent: #EFAA55;
+      --accent-deep: #F9D19B;
+      --accent-tint: #3A2A14;
+      --accent-rgb: 239,170,85;
+
+      --neutral-rgb: 154,172,180;
+
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+      --shadow-lift: 0 4px 14px rgba(0,0,0,.35), 0 24px 48px -18px rgba(0,0,0,.6);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #10191F;
+    --surface: #17232B;
+    --surface-2: #1C2A33;
+    --border: #2B3B44;
+    --border-soft: #223039;
+    --text: #EEEAE0;
+    --text-muted: #9AACB4;
+    --text-faint: #6D7E86;
+
+    --teal: #74C4AC;
+    --teal-deep: #B7E7D6;
+    --teal-tint: #1B332E;
+    --teal-rgb: 116,196,172;
+
+    --accent: #EFAA55;
+    --accent-deep: #F9D19B;
+    --accent-tint: #3A2A14;
+    --accent-rgb: 239,170,85;
+
+    --neutral-rgb: 154,172,180;
+
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    --shadow-lift: 0 4px 14px rgba(0,0,0,.35), 0 24px 48px -18px rgba(0,0,0,.6);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Public Sans", -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color .22s ease, color .22s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body, .theme-toggle { transition: none !important; }
+  }
+
+  /* ---------- THEME TOGGLE ---------- */
+  .theme-toggle {
+    align-self: flex-end;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 13px 6px 10px;
+    margin-bottom: 4px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    background: var(--surface);
+    color: var(--text-muted);
+    font: 600 12.5px "Public Sans", sans-serif;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+  }
+  .theme-toggle:hover { color: var(--text); border-color: var(--teal); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+  .theme-toggle .tt-icon { width: 15px; height: 15px; stroke: var(--teal); flex-shrink: 0; }
+  .theme-toggle .tt-sun { display: none; }
+  .theme-toggle[data-mode="dark"] .tt-sun { display: block; }
+  .theme-toggle[data-mode="dark"] .tt-moon { display: none; }
+
+  .page {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 44px 28px 64px;
+  }
+
+  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; text-wrap: balance; margin: 0; }
+
+  .eyebrow {
+    font: 700 12px/1 "Public Sans", sans-serif;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--teal-deep);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--teal);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-title { font-size: clamp(30px, 4.4vw, 44px); font-weight: 600; line-height: 1.08; margin-top: 10px; color: var(--text); }
+  .hero-title em { font-style: normal; color: var(--teal-deep); }
+  .hero-sub { margin-top: 10px; max-width: 60ch; color: var(--text-muted); font-size: 15.5px; line-height: 1.6; }
+  .hero-meta {
+    display: flex; flex-direction: column; gap: 6px;
+    font-size: 13.5px; color: var(--text-muted);
+    text-align: right;
+    padding-bottom: 4px;
+  }
+  .hero-meta strong { color: var(--text); font-weight: 600; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    align-self: flex-end;
+    background: var(--teal-tint); color: var(--teal-deep);
+    border: 1px solid rgba(var(--teal-rgb), .35);
+    padding: 5px 12px 5px 10px; border-radius: 100px;
+    font: 600 12.5px "Public Sans", sans-serif;
+  }
+  .hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 3px rgba(var(--teal-rgb),.25); }
+
+  /* ---------- QUICK ANSWERS ---------- */
+  .quick {
+    margin-top: 26px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .quick-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 15px 16px;
+    box-shadow: var(--shadow);
+  }
+  .quick-card .q-label {
+    font: 700 10.5px "Public Sans", sans-serif; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--text-faint); display: flex; align-items: center; gap: 6px; margin-bottom: 8px;
+  }
+  .quick-card .q-label svg { width: 14px; height: 14px; stroke: var(--teal); flex-shrink: 0; }
+  .quick-card .q-value { font-size: 15px; font-weight: 600; line-height: 1.35; color: var(--text); }
+  .quick-card .q-value span.mono { font-family: "IBM Plex Mono", monospace; font-weight: 500; color: var(--text-muted); font-size: 13px; }
+  .quick-card.is-accent { border-color: rgba(var(--accent-rgb), .4); background: linear-gradient(180deg, rgba(var(--accent-rgb),.08), var(--surface) 60%); }
+  .quick-card.is-accent .q-label svg { stroke: var(--accent); }
+
+  /* ---------- JOURNEY STEPPER ---------- */
+  .journey { margin-top: 40px; }
+  .section-kicker {
+    font: 700 11.5px "Public Sans", sans-serif; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--text-faint); margin-bottom: 16px;
+  }
+  .journey-track {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 4px;
+  }
+  .journey-line {
+    position: absolute;
+    top: 17px; left: 0; right: 0; height: 3px;
+    background: var(--border);
+    border-radius: 3px;
+    z-index: 0;
+  }
+  .journey-line-fill {
+    position: absolute;
+    top: 17px; left: 0; height: 3px;
+    width: calc(100% * 1.5 / 8);
+    background: var(--teal);
+    border-radius: 3px;
+    z-index: 1;
+  }
+  .step { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; }
+  .step-dot {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--surface); border: 2px solid var(--border);
+    color: var(--text-faint);
+    font: 600 13px "IBM Plex Mono", monospace;
+  }
+  .step-dot svg { width: 16px; height: 16px; }
+  .step.done .step-dot { background: var(--teal); border-color: var(--teal); color: #fff; }
+  .step.current .step-dot { background: var(--surface); border-color: var(--teal); color: var(--teal-deep); box-shadow: 0 0 0 4px rgba(var(--teal-rgb),.18); }
+  .step-label { font: 700 11.5px "Public Sans", sans-serif; letter-spacing: .04em; color: var(--text-faint); }
+  .step.done .step-label, .step.current .step-label { color: var(--text); }
+  .step-when { font: 500 11px "IBM Plex Mono", monospace; color: var(--text-faint); }
+  .step.current .step-when { color: var(--teal-deep); font-weight: 600; }
+  .step.current .step-pill {
+    margin-top: -2px;
+    font: 700 9.5px "Public Sans", sans-serif; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--teal-deep); background: var(--teal-tint);
+    padding: 2px 8px; border-radius: 100px;
+  }
+
+  /* ---------- CALENDAR ---------- */
+  .calendar-section { margin-top: 46px; }
+  .cal-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
+  .cal-title { font-size: 24px; font-weight: 600; }
+  .cal-scroll { overflow-x: auto; margin-top: 18px; }
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(128px, 1fr));
+    min-width: 780px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--border-soft);
+    gap: 1px;
+  }
+  .cal-dow {
+    background: var(--surface-2);
+    padding: 9px 12px;
+    font: 700 11px "Public Sans", sans-serif; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .cal-day {
+    background: var(--surface);
+    min-height: 96px;
+    padding: 9px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+    border-top: 3px solid transparent;
+  }
+  .cal-day.empty { background: var(--surface-2); }
+  .cal-day .daynum { font: 600 14px "IBM Plex Mono", monospace; color: var(--text-muted); }
+  .cal-day.p1 { background: rgba(var(--teal-rgb), .08); border-top-color: rgba(var(--teal-rgb), .35); }
+  .cal-day.p2 { background: rgba(var(--teal-rgb), .17); border-top-color: rgba(var(--teal-rgb), .48); }
+  .cal-day.p3 { background: rgba(var(--teal-rgb), .27); border-top-color: rgba(var(--teal-rgb), .6); }
+  .cal-day.p4 { background: rgba(var(--teal-rgb), .38); border-top-color: rgba(var(--teal-rgb), .72); }
+  .cal-day.p5 { background: rgba(var(--teal-rgb), .5); border-top-color: rgba(var(--teal-rgb), .86); }
+  .cal-day.p6 { background: rgba(var(--accent-rgb), .16); border-top-color: rgba(var(--accent-rgb), .55); }
+  .cal-day.p7 { background: rgba(var(--neutral-rgb), .14); border-top-color: rgba(var(--neutral-rgb), .5); }
+  .cal-day .daynum { position: relative; z-index: 1; }
+  .cal-day.p3 .daynum, .cal-day.p4 .daynum, .cal-day.p5 .daynum, .cal-day.p6 .daynum { color: var(--text); }
+  .cal-day.today { box-shadow: inset 0 0 0 2px var(--teal); }
+  .cal-day.today .daynum::after {
+    content: "hari ini";
+    margin-left: 8px;
+    font: 700 8.5px "Public Sans", sans-serif; letter-spacing: .05em; text-transform: uppercase;
+    color: #fff; background: var(--teal);
+    padding: 2px 6px; border-radius: 100px;
+  }
+  .cal-tag {
+    display: flex; align-items: flex-start; gap: 6px;
+    font: 600 11.5px "Public Sans", sans-serif; line-height: 1.3;
+    color: var(--text);
+  }
+  .cal-tag svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 1px; stroke: var(--teal-deep); }
+  .cal-day.p6 .cal-tag svg { stroke: var(--accent-deep); }
+  .cal-day.milestone { background: rgba(var(--accent-rgb), .3); border-top-color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent); }
+  .cal-day.milestone .daynum { color: var(--accent-deep); font-weight: 700; }
+  .cal-day.milestone .cal-tag { color: var(--accent-deep); font-weight: 700; }
+  .cal-day.milestone .cal-tag svg { stroke: var(--accent-deep); }
+
+  .cal-legend {
+    display: flex; flex-wrap: wrap; gap: 8px 18px;
+    margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-soft);
+  }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--text-muted); }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 4px; flex-shrink: 0; }
+
+  /* ---------- PHASE CARDS ---------- */
+  .phases { margin-top: 52px; }
+  .phase-list { display: flex; flex-direction: column; gap: 14px; margin-top: 18px; }
+  .phase-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    display: grid;
+    grid-template-columns: 56px 1fr 1fr;
+    gap: 20px;
+    box-shadow: var(--shadow);
+  }
+  .phase-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--teal-tint); color: var(--teal-deep);
+  }
+  .phase-icon svg { width: 24px; height: 24px; stroke: currentColor; }
+  .phase-card.is-release .phase-icon { background: var(--accent-tint); color: var(--accent-deep); }
+  .phase-head { grid-column: 2 / 3; }
+  .phase-when { font: 600 12px "IBM Plex Mono", monospace; color: var(--teal-deep); letter-spacing: .01em; }
+  .phase-card.is-release .phase-when { color: var(--accent-deep); }
+  .phase-name { font-size: 19px; font-weight: 600; margin-top: 4px; font-family: "Fraunces", serif; }
+  .phase-focus { grid-column: 2 / 3; grid-row: 2; margin: 12px 0 0; padding-left: 18px; color: var(--text-muted); font-size: 13.8px; line-height: 1.65; }
+  .phase-focus li::marker { color: var(--teal); }
+  .phase-outcome {
+    grid-column: 3 / 4; grid-row: 1 / 3;
+    background: var(--surface-2); border-radius: var(--radius-sm);
+    padding: 14px 16px; align-self: start;
+  }
+  .phase-outcome .oc-label { font: 700 10px "Public Sans", sans-serif; letter-spacing: .09em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+  .phase-outcome p { margin: 0; font-size: 13.8px; color: var(--text); line-height: 1.55; }
+
+  .subtimeline { grid-column: 2 / 3; grid-row: 2; margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+  .sub-step { display: flex; gap: 12px; align-items: flex-start; }
+  .sub-date {
+    font: 600 11px "IBM Plex Mono", monospace; color: var(--text-muted);
+    background: var(--surface-2); border-radius: 100px; padding: 3px 9px; flex-shrink: 0; margin-top: 1px;
+  }
+  .sub-step.is-milestone .sub-date { background: var(--accent-tint); color: var(--accent-deep); font-weight: 700; }
+  .sub-body strong { display: block; font-size: 13.8px; font-weight: 700; color: var(--text); }
+  .sub-body span { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .sub-step.is-milestone .sub-body strong { color: var(--accent-deep); }
+
+  /* ---------- MILESTONE FEATURE ---------- */
+  .milestone-feature {
+    margin-top: 52px;
+    background: linear-gradient(155deg, rgba(var(--accent-rgb),.14), var(--surface) 55%);
+    border: 1px solid rgba(var(--accent-rgb), .4);
+    border-radius: 20px;
+    padding: 32px 34px;
+    box-shadow: var(--shadow-lift);
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 30px;
+  }
+  .mf-date {
+    display: inline-flex; align-items: center; gap: 8px;
+    font: 700 12px "Public Sans", sans-serif; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--accent-deep);
+  }
+  .mf-date svg { width: 16px; height: 16px; stroke: var(--accent-deep); }
+  .mf-title { font-size: 30px; font-weight: 700; margin-top: 10px; line-height: 1.1; }
+  .mf-sub { margin-top: 10px; color: var(--text-muted); font-size: 14.5px; line-height: 1.6; max-width: 46ch; }
+  .mf-status {
+    margin-top: 18px; display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #fff;
+    font: 700 12px "Public Sans", sans-serif; letter-spacing: .03em;
+    padding: 8px 16px; border-radius: 100px;
+  }
+  .mf-status svg { width: 14px; height: 14px; }
+  .mf-list { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; align-content: start; }
+  .mf-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13.8px; color: var(--text); line-height: 1.45; }
+  .mf-list svg { width: 16px; height: 16px; stroke: var(--teal-deep); flex-shrink: 0; margin-top: 2px; }
+
+  /* ---------- MILESTONE STRIP ---------- */
+  .strip { margin-top: 52px; }
+  .strip-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 18px; }
+  .strip-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 15px 15px 16px; box-shadow: var(--shadow);
+  }
+  .strip-card .sc-date { font: 700 11.5px "IBM Plex Mono", monospace; color: var(--teal-deep); }
+  .strip-card .sc-name { margin-top: 8px; font-weight: 700; font-size: 14px; line-height: 1.3; }
+  .strip-card.is-milestone { border-color: rgba(var(--accent-rgb), .5); background: linear-gradient(180deg, rgba(var(--accent-rgb),.12), var(--surface) 65%); }
+  .strip-card.is-milestone .sc-date { color: var(--accent-deep); }
+
+  /* ---------- FOOTER ---------- */
+  .foot { margin-top: 52px; padding-top: 22px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12.5px; color: var(--text-faint); }
+  .foot strong { color: var(--text-muted); }
+
+  @media (max-width: 880px) {
+    .quick { grid-template-columns: repeat(2, 1fr); }
+    .journey-track { grid-template-columns: repeat(4, 1fr); row-gap: 22px; }
+    .journey-line, .journey-line-fill { display: none; }
+    .phase-card { grid-template-columns: 48px 1fr; }
+    .phase-head, .phase-focus, .subtimeline { grid-column: 2 / 3; }
+    .phase-outcome { grid-column: 1 / 3; grid-row: auto; margin-top: 4px; }
+    .milestone-feature { grid-template-columns: 1fr; }
+    .mf-list { grid-template-columns: 1fr; }
+    .strip-row { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .quick { grid-template-columns: 1fr 1fr; }
+    .strip-row { grid-template-columns: 1fr; }
+    .hero { align-items: flex-start; }
+    .hero-meta { text-align: left; }
+  }
+</style>
+
+<!-- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+  <symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.8 9.2l-1.8 4.4-4.4 1.8 1.8-4.4z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 18a4 4 0 0 1-.6-7.95A5 5 0 0 1 15.3 7.6 4.5 4.5 0 0 1 18 18H6.5Z"/></symbol>
+  <symbol id="i-blocks" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.4"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.4"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.4"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 6.2A2 2 0 0 1 6.5 4.2h11a2 2 0 0 1 2 2v7.6a2 2 0 0 1-2 2H10l-4.3 3.6v-3.6H6.5a2 2 0 0 1-2-2Z"/><path d="M8 9h8M8 12h5"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5l1.9 6.6 6.6 1.9-6.6 1.9L12 19.5l-1.9-6.6-6.6-1.9 6.6-1.9z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V6M4 20h16"/><rect x="7" y="13" width="3" height="7" fill="currentColor" stroke="none"/><rect x="12.5" y="9" width="3" height="11" fill="currentColor" stroke="none"/><rect x="18" y="5" width="3" height="15" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.2c0 4.6-3 7.8-7 9.3-4-1.5-7-4.7-7-9.3V6z"/><path d="M9 12.2l2 2 4-4.4"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8c2.3 2.1 3.6 5.3 3.6 8.6 0 2-.5 3.6-1.1 5l-2.5 2.4-2.5-2.4c-.6-1.4-1.1-3-1.1-5 0-3.3 1.3-6.5 3.6-8.6Z"/><circle cx="12" cy="10.5" r="1.6" fill="currentColor" stroke="none"/><path d="M9.4 15.5l-2.6 1 .4-2.8M14.6 15.5l2.6 1-.4-2.8"/><path d="M10.5 20.5c0-1 .7-1.8 1.5-1.8s1.5.8 1.5 1.8"/></symbol>
+  <symbol id="i-checklist" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="3.5" width="15" height="17" rx="2"/><path d="M8 8.3l1.4 1.4L11.8 7"/><path d="M8 14.5h8M8 17.5h8"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.8l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V4"/><path d="M6 4.5c1.6-1 3.6-1 5.2 0s3.6 1 5.2 0v8.4c-1.6 1-3.6 1-5.2 0s-3.6-1-5.2 0"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M12 19l-5-5M12 19l5-5"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 14.8A8.6 8.6 0 1 1 9.4 4a6.9 6.9 0 0 0 10.8 10.8Z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.8v2.1M12 19.1v2.1M2.8 12h2.1M19.1 12h2.1M5.5 5.5l1.5 1.5M17 17l1.5 1.5M18.5 5.5L17 7M7 17l-1.5 1.5"/></symbol>
+</defs>
+</svg>
+
+<div class="page">
+
+  <header class="hero">
+    <div>
+      <span class="eyebrow">IN-CLIMATE &middot; The Asia Foundation</span>
+      <h1 class="hero-title">Pulse AI Monitoring System<br><em>Kalender Pengerjaan &mdash; September 2026</em></h1>
+      <p class="hero-sub">Ringkasan visual perjalanan pembangunan sistem monitoring peserta berbasis WhatsApp &amp; AI, disusun agar tim program &mdash; tanpa perlu memahami sisi teknis &mdash; bisa melihat sedang di tahap apa, apa yang dikerjakan, dan kapan sistem mulai bisa dipakai.</p>
+    </div>
+    <div class="hero-meta">
+      <button class="theme-toggle" id="themeToggle" type="button" data-mode="light">
+        <svg class="tt-icon tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-moon"/></svg>
+        <svg class="tt-icon tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-sun"/></svg>
+        <span class="tt-label">Mode gelap</span>
+      </button>
+      <span class="hero-badge"><span class="dot"></span> Hari ini &middot; 4 September 2026</span>
+      <span>Disiapkan oleh <strong>Teras Digital Tech</strong></span>
+      <span>Untuk tim <strong>IN-CLIMATE &amp; TAF</strong></span>
+    </div>
+  </header>
+
+  <section class="quick" aria-label="Ringkasan cepat">
+    <div class="quick-card">
+      <div class="q-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-compass"/></svg>Tahap saat ini</div>
+      <div class="q-value">Persiapan Infrastruktur <span class="mono">&middot; 4&ndash;9 Sep</span></div>
+    </div>
+    <div class="quick-card">
+      <div class="q-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-cloud"/></svg>Sedang dikerjakan</div>
+      <div class="q-value">Domain, server, dan fondasi teknologi aplikasi</div>
+    </div>
+    <div class="quick-card is-accent">
+      <div class="q-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-rocket"/></svg>Sistem live pertama</div>
+      <div class="q-value">25 September 2026</div>
+    </div>
+    <div class="quick-card">
+      <div class="q-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-checklist"/></svg>Setelah rilis</div>
+      <div class="q-value">Stabilisasi &amp; persiapan User Acceptance Testing</div>
+    </div>
+  </section>
+
+  <section class="journey">
+    <div class="section-kicker">Alur Perjalanan Proyek</div>
+    <div class="journey-track">
+      <div class="journey-line"></div>
+      <div class="journey-line-fill"></div>
+      <div class="step done">
+        <div class="step-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-check"/></svg></div>
+        <div class="step-label">RENCANA</div>
+        <div class="step-when">1&ndash;3 Sep</div>
+      </div>
+      <div class="step current">
+        <div class="step-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-cloud"/></svg></div>
+        <div class="step-label">PERSIAPAN</div>
+        <div class="step-when">4&ndash;9 Sep</div>
+        <div class="step-pill">Berjalan</div>
+      </div>
+      <div class="step">
+        <div class="step-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-blocks"/></svg></div>
+        <div class="step-label">PEMBANGUNAN</div>
+        <div class="step-when">10&ndash;12 Sep</div>
+      </div>
+      <div class="step">
+        <div class="step-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-chat"/></svg></div>
+        <div class="step-label">WHATSAPP</div>
+        <div class="step-when">13&ndash;17 Sep</div>
+      </div>
+      <div class="step">
+        <div class="step-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-spark"/></svg></div>
+        <div class="step-label">AI</div>
+        <div class="step-when">18&ndash;22 Sep</div>
+      </div>
+      <div class="step">
+        <div class="step-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-chart"/></svg></div>
+        <div class="step-label">DASHBOARD</div>
+        <div class="step-when">23&ndash;24 Sep</div>
+      </div>
+      <div class="step">
+        <div class="step-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-rocket"/></svg></div>
+        <div class="step-label">RELEASE</div>
+        <div class="step-when">25 Sep</div>
+      </div>
+      <div class="step">
+        <div class="step-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-checklist"/></svg></div>
+        <div class="step-label">UAT</div>
+        <div class="step-when">26 Sep &rarr;</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="calendar-section">
+    <div class="cal-head">
+      <h2 class="cal-title">September 2026</h2>
+    </div>
+    <div class="cal-scroll">
+      <div class="cal-grid">
+        <div class="cal-dow">Sen</div><div class="cal-dow">Sel</div><div class="cal-dow">Rab</div><div class="cal-dow">Kam</div><div class="cal-dow">Jum</div><div class="cal-dow">Sab</div><div class="cal-dow">Min</div>
+
+        <div class="cal-day empty"></div>
+        <div class="cal-day p1"><span class="daynum">1</span><span class="cal-tag"><svg><use href="#i-compass"/></svg>Mulai perencanaan</span></div>
+        <div class="cal-day p1"><span class="daynum">2</span></div>
+        <div class="cal-day p1"><span class="daynum">3</span></div>
+        <div class="cal-day p2 today"><span class="daynum">4</span><span class="cal-tag"><svg><use href="#i-cloud"/></svg>Mulai persiapan infrastruktur</span></div>
+        <div class="cal-day p2"><span class="daynum">5</span></div>
+        <div class="cal-day p2"><span class="daynum">6</span></div>
+
+        <div class="cal-day p2"><span class="daynum">7</span></div>
+        <div class="cal-day p2"><span class="daynum">8</span></div>
+        <div class="cal-day p2"><span class="daynum">9</span></div>
+        <div class="cal-day p3"><span class="daynum">10</span><span class="cal-tag"><svg><use href="#i-blocks"/></svg>Mulai aplikasi inti</span></div>
+        <div class="cal-day p3"><span class="daynum">11</span></div>
+        <div class="cal-day p3"><span class="daynum">12</span></div>
+        <div class="cal-day p4"><span class="daynum">13</span><span class="cal-tag"><svg><use href="#i-chat"/></svg>Mulai WhatsApp &amp; monitoring</span></div>
+
+        <div class="cal-day p4"><span class="daynum">14</span></div>
+        <div class="cal-day p4"><span class="daynum">15</span></div>
+        <div class="cal-day p4"><span class="daynum">16</span></div>
+        <div class="cal-day p4"><span class="daynum">17</span></div>
+        <div class="cal-day p5"><span class="daynum">18</span><span class="cal-tag"><svg><use href="#i-spark"/></svg>Mulai AI &amp; knowledge system</span></div>
+        <div class="cal-day p5"><span class="daynum">19</span></div>
+        <div class="cal-day p5"><span class="daynum">20</span></div>
+
+        <div class="cal-day p5"><span class="daynum">21</span></div>
+        <div class="cal-day p5"><span class="daynum">22</span></div>
+        <div class="cal-day p6"><span class="daynum">23</span><span class="cal-tag"><svg><use href="#i-chart"/></svg>Dashboard completion</span></div>
+        <div class="cal-day p6"><span class="daynum">24</span><span class="cal-tag"><svg><use href="#i-shield"/></svg>Quality &amp; security check</span></div>
+        <div class="cal-day p6 milestone"><span class="daynum">25</span><span class="cal-tag"><svg><use href="#i-rocket"/></svg>Production release</span></div>
+        <div class="cal-day p7"><span class="daynum">26</span><span class="cal-tag"><svg><use href="#i-checklist"/></svg>Stabilisasi &amp; persiapan UAT</span></div>
+        <div class="cal-day"><span class="daynum">27</span></div>
+
+        <div class="cal-day"><span class="daynum">28</span></div>
+        <div class="cal-day"><span class="daynum">29</span></div>
+        <div class="cal-day"><span class="daynum">30</span></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+      </div>
+    </div>
+    <div class="cal-legend">
+      <span class="legend-item"><span class="legend-swatch" style="background:rgba(var(--teal-rgb),.15)"></span>Perencanaan &amp; Desain</span>
+      <span class="legend-item"><span class="legend-swatch" style="background:rgba(var(--teal-rgb),.28)"></span>Persiapan Infrastruktur</span>
+      <span class="legend-item"><span class="legend-swatch" style="background:rgba(var(--teal-rgb),.4)"></span>Pembangunan Aplikasi Inti</span>
+      <span class="legend-item"><span class="legend-swatch" style="background:rgba(var(--teal-rgb),.52)"></span>WhatsApp &amp; Campaign Monitoring</span>
+      <span class="legend-item"><span class="legend-swatch" style="background:rgba(var(--teal-rgb),.65)"></span>AI &amp; Knowledge System</span>
+      <span class="legend-item"><span class="legend-swatch" style="background:rgba(var(--accent-rgb),.4)"></span>Dashboard, QC &amp; Release</span>
+      <span class="legend-item"><span class="legend-swatch" style="background:rgba(var(--neutral-rgb),.35)"></span>Stabilisasi &amp; UAT</span>
+    </div>
+  </section>
+
+  <section class="phases">
+    <div class="section-kicker">Tahapan Pengerjaan &mdash; Detail per Fase</div>
+
+    <div class="phase-list">
+
+      <article class="phase-card">
+        <div class="phase-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-compass"/></svg></div>
+        <div class="phase-head">
+          <div class="phase-when">1&ndash;3 September</div>
+          <h3 class="phase-name">Perencanaan &amp; Desain</h3>
+        </div>
+        <ul class="phase-focus">
+          <li>Finalisasi kebutuhan sistem</li>
+          <li>Penyelarasan alur kerja</li>
+          <li>Penentuan tampilan dashboard</li>
+          <li>Penyiapan fondasi pengembangan</li>
+        </ul>
+        <div class="phase-outcome">
+          <div class="oc-label">Hasil</div>
+          <p>Arah sistem dan desain dashboard siap digunakan sebagai dasar pembangunan.</p>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-cloud"/></svg></div>
+        <div class="phase-head">
+          <div class="phase-when">4&ndash;9 September</div>
+          <h3 class="phase-name">Persiapan Infrastruktur</h3>
+        </div>
+        <ul class="phase-focus">
+          <li>Menyiapkan domain dan server</li>
+          <li>Menyiapkan lingkungan aplikasi</li>
+          <li>Menyiapkan penyimpanan data</li>
+          <li>Menyiapkan sistem pemrosesan pesan</li>
+        </ul>
+        <div class="phase-outcome">
+          <div class="oc-label">Hasil</div>
+          <p>Fondasi teknologi siap digunakan oleh aplikasi.</p>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-blocks"/></svg></div>
+        <div class="phase-head">
+          <div class="phase-when">10&ndash;12 September</div>
+          <h3 class="phase-name">Pembangunan Aplikasi Inti</h3>
+        </div>
+        <ul class="phase-focus">
+          <li>Membangun struktur aplikasi</li>
+          <li>Menyiapkan pengelolaan pengguna</li>
+          <li>Menyiapkan hak akses</li>
+          <li>Membangun kerangka dashboard</li>
+        </ul>
+        <div class="phase-outcome">
+          <div class="oc-label">Hasil</div>
+          <p>Aplikasi inti dan dashboard dasar mulai dapat digunakan.</p>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-chat"/></svg></div>
+        <div class="phase-head">
+          <div class="phase-when">13&ndash;17 September</div>
+          <h3 class="phase-name">WhatsApp &amp; Campaign Monitoring</h3>
+        </div>
+        <ul class="phase-focus">
+          <li>Menghubungkan sistem dengan WhatsApp resmi</li>
+          <li>Menyiapkan penerimaan &amp; pengiriman pesan</li>
+          <li>Menyiapkan peserta monitoring</li>
+          <li>Menyiapkan jadwal Pulse Check &amp; reminder otomatis</li>
+          <li>Menyiapkan pelacakan status pesan</li>
+        </ul>
+        <div class="phase-outcome">
+          <div class="oc-label">Hasil</div>
+          <p>Sistem dapat mengirim, menerima, dan menjadwalkan komunikasi monitoring peserta melalui WhatsApp.</p>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-spark"/></svg></div>
+        <div class="phase-head">
+          <div class="phase-when">18&ndash;22 September</div>
+          <h3 class="phase-name">AI &amp; Knowledge System</h3>
+        </div>
+        <ul class="phase-focus">
+          <li>Mengaktifkan AI untuk membaca respons peserta</li>
+          <li>Membuat AI memahami riwayat percakapan peserta</li>
+          <li>Menghubungkan AI dengan materi program IN-CLIMATE</li>
+          <li>Memproses voice note peserta</li>
+          <li>Mengubah percakapan menjadi informasi monitoring</li>
+        </ul>
+        <div class="phase-outcome">
+          <div class="oc-label">Hasil</div>
+          <p>AI dapat membantu memahami respons peserta dan menghasilkan data monitoring yang lebih terstruktur.</p>
+        </div>
+      </article>
+
+      <article class="phase-card is-release">
+        <div class="phase-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-rocket"/></svg></div>
+        <div class="phase-head">
+          <div class="phase-when">23&ndash;25 September</div>
+          <h3 class="phase-name">Dashboard, Quality Check &amp; Release</h3>
+        </div>
+        <div class="subtimeline">
+          <div class="sub-step">
+            <span class="sub-date">23 Sep</span>
+            <div class="sub-body"><strong>Dashboard Completion</strong><span>Daftar &amp; detail peserta, status campaign, riwayat percakapan, insight monitoring, filter &amp; pencarian, export data &amp; laporan.</span></div>
+          </div>
+          <div class="sub-step">
+            <span class="sub-date">24 Sep</span>
+            <div class="sub-body"><strong>Quality &amp; Security Check</strong><span>Pemeriksaan alur sistem, keamanan &amp; akses, perlindungan data peserta, dan perbaikan masalah penting sebelum rilis.</span></div>
+          </div>
+          <div class="sub-step is-milestone">
+            <span class="sub-date">25 Sep</span>
+            <div class="sub-body"><strong>Production Release &mdash; Initial Live System</strong><span>WhatsApp + AI + dashboard siap digunakan untuk penggunaan awal &amp; testing bersama TAF.</span></div>
+          </div>
+        </div>
+        <div class="phase-outcome">
+          <div class="oc-label">Hasil</div>
+          <p>Sistem awal tersedia di production dan siap masuk tahap penggunaan serta evaluasi.</p>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-checklist"/></svg></div>
+        <div class="phase-head">
+          <div class="phase-when">26 September &rarr;</div>
+          <h3 class="phase-name">Stabilisasi &amp; Persiapan UAT</h3>
+        </div>
+        <ul class="phase-focus">
+          <li>Memantau penggunaan awal</li>
+          <li>Memeriksa error atau kendala</li>
+          <li>Melakukan perbaikan kritis</li>
+          <li>Menyiapkan daftar isu &amp; improvement</li>
+          <li>Menyiapkan tahap User Acceptance Testing</li>
+        </ul>
+        <div class="phase-outcome">
+          <div class="oc-label">Hasil</div>
+          <p>Sistem lebih stabil dan siap memasuki tahap UAT serta iterasi berikutnya.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="milestone-feature" aria-label="Milestone utama">
+    <div>
+      <span class="mf-date"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-flag"/></svg>Milestone &middot; 25 September 2026</span>
+      <h2 class="mf-title">Initial Live System</h2>
+      <p class="mf-sub">Aplikasi monitoring peserta berbasis WhatsApp resmi tersedia untuk pertama kalinya, lengkap dengan bantuan AI dan dashboard pemantauan.</p>
+      <span class="mf-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-check"/></svg>Siap untuk Penggunaan Awal &amp; Testing</span>
+    </div>
+    <ul class="mf-list">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-check"/></svg>Registrasi peserta</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-check"/></svg>Pulse Check terjadwal</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-check"/></svg>Reminder otomatis</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-check"/></svg>Penyimpanan pesan</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-check"/></svg>Pemrosesan respons berbantuan AI</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-check"/></svg>Dashboard monitoring</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><use href="#i-check"/></svg>Reporting awal</li>
+    </ul>
+  </section>
+
+  <section class="strip">
+    <div class="section-kicker">Project Milestones</div>
+    <div class="strip-row">
+      <div class="strip-card">
+        <div class="sc-date">01&ndash;03 SEP</div>
+        <div class="sc-name">Fondasi Proyek</div>
+      </div>
+      <div class="strip-card">
+        <div class="sc-date">13&ndash;17 SEP</div>
+        <div class="sc-name">WhatsApp Monitoring Siap</div>
+      </div>
+      <div class="strip-card">
+        <div class="sc-date">18&ndash;22 SEP</div>
+        <div class="sc-name">AI Monitoring Siap</div>
+      </div>
+      <div class="strip-card is-milestone">
+        <div class="sc-date">25 SEP</div>
+        <div class="sc-name">Initial Live System</div>
+      </div>
+      <div class="strip-card">
+        <div class="sc-date">26 SEP</div>
+        <div class="sc-name">Persiapan UAT</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>Pulse AI Monitoring System &middot; IN-CLIMATE Program &middot; <strong>PT Teras Digital Tech</strong></span>
+    <span>Diperbarui 4 September 2026 &middot; Bahasa non-teknis untuk tim program &amp; M&amp;E</span>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById("themeToggle");
+    var label = btn.querySelector(".tt-label");
+    var KEY = "pulse-ai-theme";
+    var systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+    function activeMode() {
+      var attr = root.getAttribute("data-theme");
+      if (attr === "dark" || attr === "light") return attr;
+      return systemDark.matches ? "dark" : "light";
+    }
+
+    function sync() {
+      var mode = activeMode();
+      btn.setAttribute("data-mode", mode);
+      btn.setAttribute("aria-pressed", mode === "dark" ? "true" : "false");
+      label.textContent = mode === "dark" ? "Mode terang" : "Mode gelap";
+      btn.setAttribute("aria-label", "Ganti tampilan ke " + label.textContent.toLowerCase());
+    }
+
+    btn.addEventListener("click", function () {
+      var next = activeMode() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem(KEY, next); } catch (e) { /* tanpa penyimpanan, pilihan berlaku sesi ini saja */ }
+      sync();
+    });
+
+    try {
+      systemDark.addEventListener("change", function () {
+        if (!root.hasAttribute("data-theme")) sync();
+      });
+    } catch (e) { /* browser lama: cukup ikuti tema saat halaman dibuka */ }
+
+    sync();
+  })();
+</script>
